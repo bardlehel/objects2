@@ -1,4 +1,4 @@
-var model = require('../models/LanguageModel.js');
+var model = require('../models/LanguageModel');
 
 /**
  * languageController.js
@@ -45,9 +45,15 @@ module.exports = {
      * languageController.create()
      */
     create: function(req, res) {
-        var language = new model({
-			englishName : req.body.englishName
-        });
+
+       if( req.get('Content-Type') !== 'application/json'
+           || req.body.hasOwnProperty('englishName') === false) {
+           return res.json(400, {
+               message: 'wrong data'
+           });
+       }
+
+        var language = new model(req.body);
 
         language.save(function(err, language){
             if(err) {
