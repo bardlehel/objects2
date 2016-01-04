@@ -1,1 +1,4 @@
-Rakefile
+{
+  "mongodb": "mongodb://lehel:lehel123@ds053894.mongolab.com:53894/objects2",
+  "port": 8000
+}
