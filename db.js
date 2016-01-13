@@ -1,4 +1,5 @@
 /**
+/**
  * Created by RebeccaGennette on 11/27/2015.
  */
 
@@ -8,7 +9,7 @@ var mongoose = require('mongoose');
 var connectWithRetry = function() {
 
     console.log(config.mongodb);
-    return mongoose.connect(config.mongodb, {server:{auto_reconnect:true}}, function(err) {
+    return mongoose.connect(config.mongodb);/*, {server:{auto_reconnect:true}}, function(err) {
 
         if (err) {
 
@@ -19,8 +20,10 @@ var connectWithRetry = function() {
             setTimeout(connectWithRetry, 5000);
 
         }
-    })
+
+    })*/
 };
+
 
 
 module.exports = connectWithRetry();

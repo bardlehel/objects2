@@ -1,6 +1,8 @@
 import gulp from 'gulp';
 import mocha from 'gulp-mocha';
-import spawn from 'node-spawn';
+import cp from 'child_process';
+
+var spawn = cp.spawn;
 
 var node;
 
@@ -22,7 +24,7 @@ gulp.task('runtests', ['mongorestore'], function () {
 
 gulp.task('start-dev', ['runtests'], function () {
     if (node) node.kill();
-    node = spawn('node', ['index.js'], {stdio: 'inherit'})
+    node = spawn('node', ['./bin/www'], {stdio: 'inherit'})
     node.on('close', function (code) {
         if (code === 8) {
             gulp.log('Error detected, waiting for changes...');
