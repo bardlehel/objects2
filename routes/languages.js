@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/languageController.js');
+var passport = require('passport');
 
 /*
  * GET
@@ -19,22 +20,20 @@ router.get('/:id', function(req, res) {
 /*
  * POST
  */
-router.post('/', function(req, res, next) {
-    controller.create(req, res);
-});
+router.post('/',
+    passport.authenticate('basic', { session: false }),
+    function(req, res, next) {
+        controller.create(req, res);
+    });
 
 /*
  * PUT
  */
-router.put('/:id', function(req, res) {
-    //controller.update(req, res);
-});
+router.put('/:id',
+    passport.authenticate('basic', { session: false }),
+    function(req, res) {
+        //controller.update(req, res);
+    });
 
-/*
- * DELETE
- */
-router.delete('/:id', function(req, res) {
-    //controller.remove(req, res);
-});
 
 module.exports = router;

@@ -11,8 +11,8 @@ module.exports = {
      * languageController.list()
      */
     list: function(req, res) {
-        model.find(function(err, languages){
-            if(err) {
+        model.find().limit(100).exec(function(err, languages) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error getting language.'
                 });
@@ -26,13 +26,13 @@ module.exports = {
      */
     show: function(req, res) {
         var id = req.params.id;
-        model.findOne({_id: id}, function(err, language){
-            if(err) {
+        model.findOne({ _id: id }, function(err, language) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error getting language.'
                 });
             }
-            if(!language) {
+            if (!language) {
                 return res.json(404, {
                     message: 'No such language'
                 });
@@ -46,17 +46,17 @@ module.exports = {
      */
     create: function(req, res) {
 
-       if( req.get('Content-Type') !== 'application/json'
-           || req.body.hasOwnProperty('englishName') === false) {
-           return res.json(400, {
-               message: 'wrong data'
-           });
-       }
+        if (req.get('Content-Type') !== 'application/json' ||
+            req.body.hasOwnProperty('englishName') === false) {
+            return res.json(400, {
+                message: 'wrong data'
+            });
+        }
 
         var language = new model(req.body);
 
-        language.save(function(err, language){
-            if(err) {
+        language.save(function(err, language) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error saving language',
                     error: err
@@ -74,28 +74,28 @@ module.exports = {
      */
     update: function(req, res) {
         var id = req.params.id;
-        model.findOne({_id: id}, function(err, language){
-            if(err) {
+        model.findOne({ _id: id }, function(err, language) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error saving language',
                     error: err
                 });
             }
-            if(!language) {
+            if (!language) {
                 return res.json(404, {
                     message: 'No such language'
                 });
             }
 
-            language.englishName =  req.body.englishName ? req.body.englishName : language.englishName;
-			
-            language.save(function(err, language){
-                if(err) {
+            language.englishName = req.body.englishName ? req.body.englishName : language.englishName;
+
+            language.save(function(err, language) {
+                if (err) {
                     return res.json(500, {
                         message: 'Error getting language.'
                     });
                 }
-                if(!language) {
+                if (!language) {
                     return res.json(404, {
                         message: 'No such language'
                     });
@@ -110,8 +110,8 @@ module.exports = {
      */
     remove: function(req, res) {
         var id = req.params.id;
-        model.findByIdAndRemove(id, function(err, language){
-            if(err) {
+        model.findByIdAndRemove(id, function(err, language) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error getting language.'
                 });

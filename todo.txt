@@ -1,5 +1,8 @@
-*create user authentication
-*create tests
-*create roles
-*create front-end
-*create webjects
+*create tests for authentication, category creation/editing, topic creation/editing
+*create roles for users (basic user, moderator, superuser)
+*create front-end for KSG objects site/app with user registration 
+    (Meteor to start with + recycle Angular parts of topics project)
+*create initial db with following categories: Noun, Person, Event, Repeating Event, 
+    Web Content, Web Text, Audio Content, Audio Clip, Video Content, Video Clip, 
+    Verb, Activity
+*

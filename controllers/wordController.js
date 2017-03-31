@@ -11,8 +11,8 @@ module.exports = {
      * wordController.list()
      */
     list: function(req, res) {
-        model.find(function(err, words){
-            if(err) {
+        model.find().limit(100).exec(function(err, words) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error getting word.'
                 });
@@ -26,13 +26,13 @@ module.exports = {
      */
     show: function(req, res) {
         var id = req.params.id;
-        model.findOne({_id: id}, function(err, word){
-            if(err) {
+        model.findOne({ _id: id }, function(err, word) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error getting word.'
                 });
             }
-            if(!word) {
+            if (!word) {
                 return res.json(404, {
                     message: 'No such word'
                 });
@@ -46,11 +46,11 @@ module.exports = {
      */
     create: function(req, res) {
         var word = new model({
-			spelling : req.body.spelling
+            spelling: req.body.spelling
         });
 
-        word.save(function(err, word){
-            if(err) {
+        word.save(function(err, word) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error saving word',
                     error: err
@@ -68,28 +68,28 @@ module.exports = {
      */
     update: function(req, res) {
         var id = req.params.id;
-        model.findOne({_id: id}, function(err, word){
-            if(err) {
+        model.findOne({ _id: id }, function(err, word) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error saving word',
                     error: err
                 });
             }
-            if(!word) {
+            if (!word) {
                 return res.json(404, {
                     message: 'No such word'
                 });
             }
 
-            word.spelling =  req.body.spelling ? req.body.spelling : word.spelling;
-			
-            word.save(function(err, word){
-                if(err) {
+            word.spelling = req.body.spelling ? req.body.spelling : word.spelling;
+
+            word.save(function(err, word) {
+                if (err) {
                     return res.json(500, {
                         message: 'Error getting word.'
                     });
                 }
-                if(!word) {
+                if (!word) {
                     return res.json(404, {
                         message: 'No such word'
                     });
@@ -104,8 +104,8 @@ module.exports = {
      */
     remove: function(req, res) {
         var id = req.params.id;
-        model.findByIdAndRemove(id, function(err, word){
-            if(err) {
+        model.findByIdAndRemove(id, function(err, word) {
+            if (err) {
                 return res.json(500, {
                     message: 'Error getting word.'
                 });

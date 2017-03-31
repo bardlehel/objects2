@@ -4,7 +4,7 @@
 
 //add Event category
 
-//add Repating Event category
+//add Repeating Event category
 
 //add Web Content  category
 //add Web Text  category

@@ -3,14 +3,14 @@ var router = express.Router();
 var controller = require('../controllers/wordController.js');
 
 /*
- * GET
+ * GET LIST (100 max)
  */
 router.get('/', function(req, res) {
     controller.list(req, res);
 });
 
 /*
- * GET
+ * GET SINGLE
  */
 router.get('/:id', function(req, res) {
     controller.show(req, res);
@@ -19,22 +19,20 @@ router.get('/:id', function(req, res) {
 /*
  * POST
  */
-router.post('/', function(req, res) {
-    controller.create(req, res);
-});
+router.post('/',
+    passport.authenticate('basic', { session: false }),
+    function(req, res) {
+        controller.create(req, res);
+    });
 
 /*
  * PUT
  */
-router.put('/:id', function(req, res) {
-    controller.update(req, res);
-});
+router.put('/:id',
+    passport.authenticate('basic', { session: false }),
+    function(req, res) {
+        controller.update(req, res);
+    });
 
-/*
- * DELETE
- */
-router.delete('/:id', function(req, res) {
-    controller.remove(req, res);
-});
 
 module.exports = router;
