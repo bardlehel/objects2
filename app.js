@@ -11,12 +11,14 @@ var authConfig = require('./config/auth');
 
 
 //configure passport authentication system
-authConfig.configureLocalAuth(app);
+authConfig.configureBasicAuth(app);
 
 var routes = require('./routes/index');
-var auth = require('./routes/auth');
 var users = require('./routes/users');
 var languages = require('./routes/languages');
+var words = require('./routes/words');
+var categories = require('./routes/categorys');
+var topics = require('./routes/topics');
 
 
 // view engine setup
@@ -35,9 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', routes);
-app.use('/auth', auth);
-//app.use('/users', users);
-app.use('/languages/', languages);
+app.use('/api/users', users);
+app.use('/api/languages/', languages);
+app.use('/api/words/', words);
+app.use('/api/categories/', categories);
+app.use('/api/topics/', topics);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

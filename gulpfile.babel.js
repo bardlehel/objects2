@@ -17,22 +17,22 @@ gulp.task('mongorestore', function() {
     */
 });
 
-gulp.task('runtests', ['mongorestore'], function () {
-    return gulp.src('./tests/*.js', {read: false})
+gulp.task('runtests', ['mongorestore'], function() {
+    return gulp.src('./test/**/*.js', { read: false })
         .pipe(mocha({}));
 });
 
-gulp.task('start-dev', ['runtests'], function () {
+gulp.task('start-dev', ['runtests'], function() {
     if (node) node.kill();
-    node = spawn('node', ['./bin/www'], {stdio: 'inherit'})
-    node.on('close', function (code) {
+    node = spawn('node', ['./bin/www'], { stdio: 'inherit' })
+    node.on('close', function(code) {
         if (code === 8) {
             gulp.log('Error detected, waiting for changes...');
         }
     });
 });
 
-gulp.task('default', ['start-dev'], function () {
+gulp.task('default', ['start-dev'], function() {
     "use strict";
 
 });
@@ -40,5 +40,3 @@ gulp.task('default', ['start-dev'], function () {
 process.on('exit', function() {
     if (node) node.kill()
 })
-
-

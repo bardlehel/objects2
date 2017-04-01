@@ -3,9 +3,10 @@
  * Created by RebeccaGennette on 11/27/2015.
  */
 var USE_DB_DEFAULT = 0;
+var USE_DB_LOCAL = USE_DB_DEFAULT;
 var USE_DB_MLAB = 1;
 //set db to which host mongodb is to be connected to
-var db = USE_DB_MLAB;
+var db = USE_DB_LOCAL;
 
 var config;
 if (db === USE_DB_MLAB) {

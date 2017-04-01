@@ -13,13 +13,13 @@ var CategorySchema = new Schema({
             type: ObjectId,
             ref: Word
         },
-        nameApproval: [Vote],
-        "creationInfo": PostInfo
+        nameApproval: [Vote.schema],
+        "creationInfo": PostInfo.schema
     }],
-    "parents": [CategoryParentAssociation],
-    "properties": [CategoryPropertyAssociation],
-    "categoryApproval": [Vote],
-    "creationInfo": PostInfo
+    "parents": [CategoryParentAssociation.schema],
+    "properties": [CategoryPropertyAssociation.schema],
+    "categoryApproval": [Vote.schema],
+    "creationInfo": PostInfo.schema
 });
 
 module.exports = mongoose.model('Category', CategorySchema);

@@ -1,6 +1,7 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
-var controller = require('../controllers/CategoryController.js');
+var controller = require('../controllers/categoryController.js');
 
 /*
  * GET
@@ -20,19 +21,19 @@ router.get('/:id', function(req, res) {
  * POST
  */
 router.post('/',
-  passport.authenticate('basic', { session: false }),
-  function(req, res) {
-    controller.create(req, res);
-});
+    passport.authenticate('basic', { session: false }),
+    function(req, res) {
+        controller.create(req, res);
+    });
 
 /*
  * PUT
  */
 router.put('/:id',
-  passport.authenticate('basic', { session: false }),
-  function(req, res) {
-    controller.update(req, res);
-});
+    passport.authenticate('basic', { session: false }),
+    function(req, res) {
+        controller.update(req, res);
+    });
 
 /*
  * DELETE

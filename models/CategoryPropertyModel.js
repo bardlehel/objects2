@@ -31,9 +31,9 @@ var CategoryPropertySchema = new Schema({
         ]
     },
     "dataConstraints": Array,
-    "author": User,
+    "author": User.schema,
     "creationDate": Date,
-    "propertyApproval": [Vote]
+    "propertyApproval": [Vote.schema]
 });
 
 module.exports = mongoose.model('CategoryProperty', CategoryPropertySchema);

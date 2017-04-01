@@ -3,7 +3,7 @@
 var passport = require('passport'),
     //BearerStrategy = require('passport-http-bearer').Strategy;
     BasicStrategy = require('passport-http').BasicStrategy;
-var User = require('./models/UserModel');
+var User = require('../models/UserModel');
 
 module.exports = {
     configureBasicAuth: function(app) {

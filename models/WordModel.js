@@ -10,7 +10,7 @@ var wordSchema = new Schema({
         type: ObjectId,
         ref: Language
     },
-    "wordApproval": [Vote]
+    "wordApproval": [Vote.schema]
 });
 
 module.exports = mongoose.model('word', wordSchema);

@@ -1,6 +1,7 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
-var controller = require('../controllers/TopicController.js');
+var controller = require('../controllers/topicController.js');
 
 /*
  * GET

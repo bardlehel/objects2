@@ -14,8 +14,8 @@ var TopicSchema = new Schema({
             type: ObjectId,
             ref: Word
         },
-        nameApproval: [Vote],
-        "creationInfo": PostInfo
+        nameApproval: [Vote.schema],
+        "creationInfo": PostInfo.schema
     }],
     "is": [{
         type: ObjectId,
@@ -30,12 +30,12 @@ var TopicSchema = new Schema({
         valueNumber: Number,
         valueDate: Date,
         valueArray: Array,
-        valueRating: [Vote],
-        propertyValueApproval: [Vote],
-        "creationInfo": PostInfo
+        valueRating: [Vote.schema],
+        propertyValueApproval: [Vote.schema],
+        "creationInfo": PostInfo.schema
     }],
-    "topicApproval": [Vote],
-    "creationInfo": PostInfo
+    "topicApproval": [Vote.schema],
+    "creationInfo": PostInfo.schema
 });
 
 module.exports = mongoose.model('Topic', TopicSchema);

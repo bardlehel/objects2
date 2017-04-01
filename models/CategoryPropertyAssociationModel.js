@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Vote = require('./VoteModel.js');
 var PostInfo = require('./PostModel');
-var CategoryProperty = require('./CategoryProperty.js');
+var CategoryProperty = require('./CategoryPropertyModel.js');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
 
@@ -10,8 +10,8 @@ var CategoryPropertyAssociationSchema = new Schema({
         type: ObjectId,
         ref: CategoryProperty
     },
-    "propertyAssociationApproval": [Vote],
-    "creationInfo": PostInfo
+    "propertyAssociationApproval": [Vote.schema],
+    "creationInfo": PostInfo.schema
 });
 
 module.exports = mongoose.model('CategoryPropertyAssociation', CategoryPropertyAssociationSchema);

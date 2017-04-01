@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 var User = require('./UserModel.js');
 var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.ObjectId;
 
-var PostSchema = new Schema({
+var postSchema = new Schema({
     "author": {
         type: ObjectId,
         ref: User
