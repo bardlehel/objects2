@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import mocha from 'gulp-mocha';
 import cp from 'child_process';
+import exit from 'gulp-exit';
 
 var spawn = cp.spawn;
 
@@ -17,9 +18,13 @@ gulp.task('mongorestore', function() {
     */
 });
 
+function handleError(err) {
+    this.emit('end');
+}
+
 gulp.task('runtests', ['mongorestore'], function() {
     return gulp.src('./test/**/*.js', { read: false })
-        .pipe(mocha({}));
+        .pipe(mocha({}).on("error", handleError));
 });
 
 gulp.task('start-dev', ['runtests'], function() {
@@ -36,6 +41,9 @@ gulp.task('default', ['start-dev'], function() {
     "use strict";
 
 });
+
+gulp.on('stop', () => { process.exit(0); });
+gulp.on('err', () => { process.exit(1); });
 
 process.on('exit', function() {
     if (node) node.kill()

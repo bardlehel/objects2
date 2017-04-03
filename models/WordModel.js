@@ -13,4 +13,4 @@ var wordSchema = new Schema({
     "wordApproval": [Vote.schema]
 });
 
-module.exports = mongoose.model('word', wordSchema);
+module.exports = mongoose.model('Word', wordSchema);

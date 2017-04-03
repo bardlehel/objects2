@@ -8,7 +8,8 @@ var UserSchema = new Schema({
     "userName": String,
     "firstName": String,
     "lastName": String,
-    "mainPhotoURL": String
+    "mainPhotoURL": String,
+    "role": String //basic, moderator, superuser
 });
 
 module.exports = mongoose.model('User', UserSchema);
