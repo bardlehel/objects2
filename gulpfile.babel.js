@@ -1,3 +1,5 @@
+"use strict";
+
 import gulp from 'gulp';
 import nodemon from 'gulp-nodemon';
 import jshint from 'gulp-jshint';
