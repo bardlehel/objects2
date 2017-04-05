@@ -2,6 +2,7 @@ var GeoJSON = require('mongoose-geojson-schema');
 var mongoose = require('mongoose');
 var Word = require('./WordModel.js');
 var PostInfo = require('./PostModel.js');
+var MessageBoard = require('./MessageBoardModel.js');
 var Vote = require('./VoteModel.js');
 var Category = require('./CategoryModel.js');
 var CategoryProperty = require('./CategoryPropertyModel.js');
@@ -44,7 +45,8 @@ var TopicSchema = new Schema({
 
     }],
     "topicApproval": [Vote.schema],
-    "creationInfo": PostInfo.schema
+    "creationInfo": PostInfo.schema,
+    "topicDiscussionBoard": MessageBoard.schema
 }, { collection: 'topics' });
 
 module.exports = mongoose.model('Topic', TopicSchema);

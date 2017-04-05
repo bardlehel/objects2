@@ -20,7 +20,16 @@ var CategorySchema = new Schema({
     "properties": [CategoryPropertyAssociation.schema],
     "categoryApproval": [Vote.schema],
     "creationInfo": PostInfo.schema,
-    "canCreateTopicFrom": Boolean
+    "canCreateTopicFrom": Boolean,
+    "appSchema": Boolean, //makes this a private/locked category for applications (no voting editing of categories but topics may be created by others)
+    "parentAppSchemaVersion": {
+        type: ObjectId,
+        ref: CategorySchema
+    },
+    "firstAppSchemaVersion": {
+        type: ObjectId,
+        ref: CategorySchema,
+    }
 }, { collection: 'categories' });
 
 module.exports = mongoose.model('Category', CategorySchema);

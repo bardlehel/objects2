@@ -110,6 +110,18 @@ Activity:
     properties:
         verb
 
+Category:
+UpTag (Tagree, poptag, tagrating, tagvotes, tagranks, taglikes, tagstrength, tagweight, )
+    parent: Category, (title: 'uptag' description: 'tag that can be upvoted and downvoted for relevance')
+    topic: topic objectid (topic created/used for the uptag) ('category' category)
+    relevanceVote: [Vote]
+
+
+Category:
+    BestofCamsShow/Vid 
+    tags: list of uptags + add new (or rank)
+
+
 
 
 

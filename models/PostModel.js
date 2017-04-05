@@ -8,7 +8,8 @@ var postSchema = new Schema({
         type: ObjectId,
         ref: User
     },
-    "createdAt": Date
+    "createdAt": Date,
+    "message": String
 }, { collection: 'posts' });
 
 module.exports = mongoose.model('Post', postSchema);
