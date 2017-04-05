@@ -3,6 +3,127 @@
 *create front-end for KSG objects site/app with user registration 
     (Meteor to start with + recycle Angular parts of topics project)
 *create initial db with following categories: Noun, Person, Event, Repeating Event, 
-    Web Content, Web Text, Audio Content, Audio Clip, Video Content, Video Clip, 
+    Web Content, Web HTML, Audio Content, Audio Clip, Video Content, Video Clip, 
     Verb, Activity
-*
+
+User: ksg (superuser)
+
+all posts made by ksg wont have voting on them (are locked)
+
+words:
+noun (id)
+
+(inherited from Category )categoryproperties: 
+    "description": string
+    "image" URL (web content?)
+
+
+person (id)
+    parent: noun (category id)
+    category Properties:
+        noun category properties (ids)
+        +
+        name: named string list first:'lehel' middle:'john' last:'kovach' suffix'III'
+        aliases: string list
+        dob: date
+        loc-of-birth: geodata
+        hometown: geodata
+        dod: date
+        height: number
+        weight: number
+        
+event:
+    parent: noun
+    category properties:
+        noun properties
+        +
+        location: geodata,
+        begin date: date
+        start time: time
+        end date: date
+        end time: time
+        all-day?:
+        attendees: list of topics of a category
+
+repeating event:
+    parent: event
+    properties:
+        event properties +
+        repeats on: ordered string list ("wednesday", "Friday", "March 27")
+        until: date 
+
+Web Content:
+    parent: noun
+    properties:
+        noun + 
+        URL: string (url)
+        mime-type: string
+
+Web HTML:
+    parent: web content
+    properties:
+        web content +
+        character start index: number
+        length in characters: number
+
+
+Audio Content:
+    parent: web content
+    properties:
+        web content +
+        format: string
+
+Video Content:
+    "..."
+
+Audio Clip:
+    parent: audio content
+    properties:
+        audio content +
+        start time:
+        length in seconds: number
+
+Video Clip:
+    parent: video content
+    properties:
+        video content +
+        start time:
+        length in seconds: number
+
+Live Audio Stream:
+    parent: audio content
+    properties:
+        audio content
+
+Live Video Stream:
+    parent: video content
+    properties:
+        video content
+
+Verb: (synonyms: action)
+    parent: category
+    properties:
+        category
+
+Activity: 
+    parent: Verb
+    properties:
+        verb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*create a UI for voting on edits so a user can see that 
+there is a current value and there is a new value added, as well as all other
+values, and that the user can choose to vote on one over the others
+(upvote on one, downvote on the rest) - and that is enforced by the system

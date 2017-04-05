@@ -1,3 +1,4 @@
+var GeoJSON = require('mongoose-geojson-schema');
 var mongoose = require('mongoose');
 var Word = require('./WordModel.js');
 var PostInfo = require('./PostModel.js');
@@ -26,13 +27,21 @@ var TopicSchema = new Schema({
             type: ObjectId,
             ref: CategoryProperty
         },
-        valueString: String,
-        valueNumber: Number,
-        valueDate: Date,
-        valueArray: Array,
-        valueRating: [Vote.schema],
-        propertyValueApproval: [Vote.schema],
-        "creationInfo": PostInfo.schema
+
+        values: [{
+            valueArray: [{ //holds single value or if array then multiple values
+                valueString: String,
+                valueNumber: Number,
+                valueDate: Date,
+                valueObject: ObjectId,
+                valueGeodata: mongoose.Schema.Types.GeoJSON,
+                valueRating: [Vote.schema],
+                valueName: String //for named elements
+            }],
+            propertyValueApproval: [Vote.schema],
+            "creationInfo": PostInfo.schema
+        }],
+
     }],
     "topicApproval": [Vote.schema],
     "creationInfo": PostInfo.schema

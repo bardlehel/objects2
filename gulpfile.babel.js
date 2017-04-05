@@ -58,7 +58,7 @@ gulp.task('start-dev', ['lint', 'run-tests'], function() {
     return nodemonStream;
 
 });
-/*
+
 gulp.task('stop', function() {
     process.exit();
 });
@@ -71,7 +71,7 @@ gulp.on('err', () => {
     console.log('process error');
     process.exit(1);
 });
-
+/*
 gulp.doneCallback = function(err) {
     process.exit(err ? 1 : 0);
 };

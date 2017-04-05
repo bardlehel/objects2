@@ -19,7 +19,8 @@ var CategorySchema = new Schema({
     "parents": [CategoryParentAssociation.schema],
     "properties": [CategoryPropertyAssociation.schema],
     "categoryApproval": [Vote.schema],
-    "creationInfo": PostInfo.schema
+    "creationInfo": PostInfo.schema,
+    "canCreateTopicFrom": Boolean
 }, { collection: 'categories' });
 
 module.exports = mongoose.model('Category', CategorySchema);
