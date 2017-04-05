@@ -1,5 +1,6 @@
 var GeoJSON = require('mongoose-geojson-schema');
 var mongoose = require('mongoose');
+require('mongoose-type-url');
 var Word = require('./WordModel.js');
 var PostInfo = require('./PostModel.js');
 var MessageBoard = require('./MessageBoardModel.js');
@@ -34,6 +35,7 @@ var TopicSchema = new Schema({
                 valueString: String,
                 valueNumber: Number,
                 valueDate: Date,
+                valueURL: mongoose.SchemaTypes.Url,
                 valueObject: ObjectId,
                 valueGeodata: mongoose.Schema.Types.GeoJSON,
                 valueRating: [Vote.schema],

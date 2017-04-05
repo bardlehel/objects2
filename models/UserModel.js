@@ -1,5 +1,15 @@
 var mongoose = require('mongoose');
+var TopicModel = require('./TopicModel.js');
 var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.ObjectId;
+
+var ListSchema = new Schema({
+    "name": String,
+    "items": {
+        type: ObjectId,
+        ref:
+    }
+});
 
 var UserSchema = new Schema({
     "email": String,
@@ -9,7 +19,24 @@ var UserSchema = new Schema({
     "firstName": String,
     "lastName": String,
     "mainPhotoURL": String,
-    "role": String //basic, moderator, superuser
+    "role": {
+        type: String,
+        enum: [
+            "nonmember",
+            "banned",
+            "basic",
+            "level-1",
+            "level0",
+            "level1",
+            "level2",
+            "level3",
+            "level4",
+            "level5",
+            "moderator",
+            "admin",
+            "superuser",
+        ],
+    }
 }, { collection: 'users' });
 
 module.exports = mongoose.model('User', UserSchema);
