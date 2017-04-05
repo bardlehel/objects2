@@ -3,12 +3,30 @@ var TopicModel = require('./TopicModel.js');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
 
-var ListSchema = new Schema({
+var UserTopicListSchema = new Schema({
     "name": String,
-    "items": {
-        type: ObjectId,
-        ref:
-    }
+    "items": [{
+        "itemid": ObjectId,
+        "metadata": [{
+            "name": String,
+            "valueType": {
+                type: String,
+                enum: [
+                    "String",
+                    "Number",
+                    "Date",
+                    "TimeSpan",
+                    "Category",
+                    "Topic",
+                    "User",
+                    "URL",
+                    "Geodata",
+                    "Rating"
+                ]
+            },
+
+        }]
+    }]
 });
 
 var UserSchema = new Schema({
