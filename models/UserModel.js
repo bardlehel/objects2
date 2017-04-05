@@ -1,5 +1,6 @@
+var GeoJSON = require('mongoose-geojson-schema');
 var mongoose = require('mongoose');
-var TopicModel = require('./TopicModel.js');
+require('mongoose-type-url');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
 
@@ -15,16 +16,21 @@ var UserTopicListSchema = new Schema({
                     "String",
                     "Number",
                     "Date",
-                    "TimeSpan",
                     "Category",
                     "Topic",
                     "User",
                     "URL",
-                    "Geodata",
-                    "Rating"
+                    "Geodata"
                 ]
             },
-
+            "valString": String,
+            "valNumber": Number,
+            "valDateTime": Date,
+            "valCategory": ObjectId,
+            "valTopic": ObjectId,
+            "valUser": ObjectId,
+            "valURL": mongoose.SchemaTypes.Url,
+            "valGeodata": mongoose.Schema.Types.GeoJSON
         }]
     }]
 });
@@ -54,7 +60,8 @@ var UserSchema = new Schema({
             "admin",
             "superuser",
         ],
-    }
+    },
+    "topicLists": [UserTopicListSchema]
 }, { collection: 'users' });
 
 module.exports = mongoose.model('User', UserSchema);
