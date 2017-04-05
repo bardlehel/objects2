@@ -11,6 +11,6 @@ var wordSchema = new Schema({
         ref: Language
     },
     "wordApproval": [Vote.schema]
-});
+}, { collection: 'words' });
 
 module.exports = mongoose.model('Word', wordSchema);

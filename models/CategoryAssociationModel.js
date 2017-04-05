@@ -12,6 +12,6 @@ var CategoryParentAssociationSchema = new Schema({
     },
     "parentAssociationApproval": [Vote.schema],
     "creationInfo": PostInfo.schema
-});
+}, { collection: 'categoryassociations' });
 
 module.exports = mongoose.model('CategoryParentAssociation', CategoryParentAssociationSchema);

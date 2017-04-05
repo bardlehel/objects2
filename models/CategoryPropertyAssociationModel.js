@@ -12,6 +12,6 @@ var CategoryPropertyAssociationSchema = new Schema({
     },
     "propertyAssociationApproval": [Vote.schema],
     "creationInfo": PostInfo.schema
-});
+}, { collection: 'categorypropertyassociations' });
 
 module.exports = mongoose.model('CategoryPropertyAssociation', CategoryPropertyAssociationSchema);

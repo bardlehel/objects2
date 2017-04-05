@@ -1,4 +1,4 @@
-/**
+"use strict";
 /**
  * Created by RebeccaGennette on 11/27/2015.
  */
@@ -17,25 +17,23 @@ if (db === USE_DB_MLAB) {
 
 var mongoose = require('mongoose');
 
-var connectWithRetry = function() {
+var dbConnection = {};
 
-    console.log(config.mongodb);
-    return mongoose.connect(config.mongodb);
-    /*, {server:{auto_reconnect:true}}, function(err) {
+dbConnection.connectWithRetry = function() {
+    console.log("mongo connection string: " + config.mongodb);
+    mongoose.Promise = global.Promise;
+    return mongoose.connect(config.mongodb, { server: { auto_reconnect: true } }, function(err) {
+        if (err) {
+            console.error('No connection to MongoDB server - retrying in 5 sec', err);
+            mongoose.disconnect();
+            setTimeout(dbConnection.connectWithRetry, 5000);
+        }
+    });
+};
 
-            if (err) {
-
-                console.error('No connection to MongoDB server - retrying in 5 sec', err);
-
-                mongoose.disconnect();
-
-                setTimeout(connectWithRetry, 5000);
-
-            }
-
-        })*/
+dbConnection.closeConnection = function() {
+    mongoose.connection.close();
 };
 
 
-
-module.exports = connectWithRetry();
+module.exports = dbConnection;

@@ -36,6 +36,6 @@ var TopicSchema = new Schema({
     }],
     "topicApproval": [Vote.schema],
     "creationInfo": PostInfo.schema
-});
+}, { collection: 'topics' });
 
 module.exports = mongoose.model('Topic', TopicSchema);

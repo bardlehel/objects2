@@ -10,6 +10,6 @@ var UserSchema = new Schema({
     "lastName": String,
     "mainPhotoURL": String,
     "role": String //basic, moderator, superuser
-});
+}, { collection: 'users' });
 
 module.exports = mongoose.model('User', UserSchema);

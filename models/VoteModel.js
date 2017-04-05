@@ -11,6 +11,6 @@ var VoteSchema = new Schema({
         ref: User
     },
     votedAt: Date
-});
+}, { collection: 'votes' });
 
 module.exports = mongoose.model('Vote', VoteSchema);

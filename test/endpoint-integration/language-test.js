@@ -17,7 +17,7 @@ describe('Language Endpoints Integration test', function() {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.length.should.be.above(0);
-                res.body.should.have.an.item.with.property('englishName', 'English');
+                res.body.should.include.something.with.property('englishName', 'English');
                 done();
             });
     });

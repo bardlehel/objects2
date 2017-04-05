@@ -1,14 +1,19 @@
+"use strict";
+console.log('loding app.js file');
+
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
+var favicon = require('serve-favicon')
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
 
-var dbConn = require('./config/db');
+var dbConnection = require('./config/db');
 var authConfig = require('./config/auth');
 
+//connect to databases
+dbConnection.connectWithRetry();
 
 //configure passport authentication system
 authConfig.configureBasicAuth(app);
@@ -22,11 +27,12 @@ var topics = require('./routes/topics');
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'jade');
+app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json({
     extended: true
@@ -42,6 +48,16 @@ app.use('/api/languages/', languages);
 app.use('/api/words/', words);
 app.use('/api/categories/', categories);
 app.use('/api/topics/', topics);
+
+app.get('/favicon.ico', function(req, res) {
+    res.send(204);
+});
+
+app.get('*', function(req, res, next) {
+    var err = new Error();
+    err.status = 404;
+    next(err);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,6 +88,12 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+//handle exit
+process.on('exit', function() {
+    dbConnection.closeConnection();
+    console.log('ksg api service exiting!');
 });
 
 module.exports = app;

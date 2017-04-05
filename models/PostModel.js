@@ -9,6 +9,6 @@ var postSchema = new Schema({
         ref: User
     },
     "createdAt": Date
-});
+}, { collection: 'posts' });
 
 module.exports = mongoose.model('Post', postSchema);

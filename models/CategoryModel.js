@@ -20,6 +20,6 @@ var CategorySchema = new Schema({
     "properties": [CategoryPropertyAssociation.schema],
     "categoryApproval": [Vote.schema],
     "creationInfo": PostInfo.schema
-});
+}, { collection: 'categories' });
 
 module.exports = mongoose.model('Category', CategorySchema);
