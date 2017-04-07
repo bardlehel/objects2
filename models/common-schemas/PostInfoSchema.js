@@ -1,15 +1,13 @@
 var mongoose = require('mongoose');
-var User = require('./UserModel.js');
+var UserSchema = require('../UserModel.js').schema;
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
 
-var postSchema = new Schema({
+module.exports = new Schema({
     "author": {
         type: ObjectId,
-        ref: User
+        ref: UserSchema
     },
     "createdAt": Date,
     "message": String
-}, { collection: 'posts' });
-
-module.exports = mongoose.model('Post', postSchema);
+});

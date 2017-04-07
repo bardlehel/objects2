@@ -1,11 +1,28 @@
 var mongoose = require('mongoose');
 var Word = require('./WordModel.js');
-var Vote = require('./VoteModel.js');
-var PostInfo = require('./PostModel.js');
-var CategoryParentAssociation = require('./CategoryAssociationModel.js');
-var CategoryPropertyAssociation = require('./CategoryPropertyAssociationModel.js');
+var VoteSchema = require('./common-schemas/VoteSchema.js');
+var PostInfoSchema = require('./common-schemas/PostInfoSchema.js');
+var CategoryPropertySchema = require('./CategoryPropertyModel.js').schema;
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
+
+var CategoryParentAssociationSchema = new Schema({
+    "parent": {
+        type: ObjectId,
+        ref: CategorySchema
+    },
+    "parentAssociationApproval": [VoteSchema],
+    "creationInfo": PostInfoSchema
+});
+
+var CategoryPropertyAssociationSchema = new Schema({
+    "categoryProperty": {
+        type: ObjectId,
+        ref: CategoryPropertySchema
+    },
+    "propertyAssociationApproval": [VoteSchema],
+    "creationInfo": PostInfoSchema
+});
 
 var CategorySchema = new Schema({
     "names": [{
@@ -13,13 +30,13 @@ var CategorySchema = new Schema({
             type: ObjectId,
             ref: Word
         },
-        nameApproval: [Vote.schema],
-        "creationInfo": PostInfo.schema
+        nameApproval: [VoteSchema],
+        "creationInfo": PostInfoSchema
     }],
-    "parents": [CategoryParentAssociation.schema],
-    "properties": [CategoryPropertyAssociation.schema],
-    "categoryApproval": [Vote.schema],
-    "creationInfo": PostInfo.schema,
+    "parents": [CategoryParentAssociationSchema],
+    "properties": [CategoryPropertyAssociationSchema],
+    "categoryApproval": [VoteSchema],
+    "creationInfo": PostInfoSchema,
     "canCreateTopicFrom": Boolean,
     "appSchema": Boolean, //makes this a private/locked category for applications (no voting editing of categories but topics may be created by others)
     "parentAppSchemaVersion": {

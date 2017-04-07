@@ -1,16 +1,14 @@
 var mongoose = require('mongoose');
-var User = require('./UserModel');
+var UserSchema = require('../UserModel').schema;
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
 
 
-var VoteSchema = new Schema({
+module.exports = new Schema({
     vote: Number,
     voter: {
         type: ObjectId,
-        ref: User
+        ref: UserSchema
     },
     votedAt: Date
-}, { collection: 'votes' });
-
-module.exports = mongoose.model('Vote', VoteSchema);
+});

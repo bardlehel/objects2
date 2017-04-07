@@ -1,7 +1,6 @@
 "use strict";
-console.log('loding app.js file');
-
 var express = require('express');
+var engines = require('consolidate');
 var path = require('path');
 var logger = require('morgan');
 var favicon = require('serve-favicon')
@@ -28,7 +27,7 @@ var topics = require('./routes/topics');
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
+app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
@@ -53,12 +52,6 @@ app.get('/favicon.ico', function(req, res) {
     res.send(204);
 });
 
-app.get('*', function(req, res, next) {
-    var err = new Error();
-    err.status = 404;
-    next(err);
-});
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -73,7 +66,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.json({
             message: err.message,
             error: err
         });
@@ -84,7 +77,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json({
         message: err.message,
         error: {}
     });

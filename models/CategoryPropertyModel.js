@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var Word = require('./WordModel.js');
-var Vote = require('./VoteModel.js');
-var User = require('./UserModel.js');
-var PostInfo = require('./PostModel.js');
+var WordSchema = require('./WordModel.js').schema;
+var VoteSchema = require('./common-schemas/VoteSchema.js');
+var UserSchema = require('./UserModel.js').schema;
+var PostInfoSchema = require('./common-schemas/PostInfoSchema.js');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
 
@@ -10,10 +10,10 @@ var CategoryPropertySchema = new Schema({
     "names": [{
         word: {
             type: ObjectId,
-            ref: Word
+            ref: WordSchema
         },
-        nameApproval: [Vote.schema],
-        "creationInfo": PostInfo.schema
+        nameApproval: [VoteSchema],
+        "creationInfo": PostInfoSchema
     }],
     "dataType": {
         type: String,
@@ -35,9 +35,9 @@ var CategoryPropertySchema = new Schema({
     hasNamedElements: Boolean,
     topicCategoryId: ObjectId,
     "dataConstraints": Array,
-    "author": User.schema,
+    "author": UserSchema,
     "creationDate": Date,
-    "propertyApproval": [Vote.schema]
+    "propertyApproval": [VoteSchema]
 }, { collection: 'categoryproperties' });
 
 module.exports = mongoose.model('CategoryProperty', CategoryPropertySchema);

@@ -1,33 +1,41 @@
 var GeoJSON = require('mongoose-geojson-schema');
 var mongoose = require('mongoose');
 require('mongoose-type-url');
-var Word = require('./WordModel.js');
-var PostInfo = require('./PostModel.js');
-var MessageBoard = require('./MessageBoardModel.js');
-var Vote = require('./VoteModel.js');
-var Category = require('./CategoryModel.js');
-var CategoryProperty = require('./CategoryPropertyModel.js');
+var WordSchema = require('./WordModel.js').schema;
+var PostInfoSchema = require('./common-schemas/PostInfoSchema.js');
+var VoteSchema = require('./common-schemas/VoteSchema.js');
+var CategorySchema = require('./CategoryModel.js').schema;
+var CategoryPropertySchema = require('./CategoryPropertyModel.js').schema;
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.ObjectId;
 
+
+var MessageBoardTopicSchema = new Schema({
+    "posts": [PostInfoSchema],
+    "subject": String
+});
+
+var MessageBoardSchema = new Schema({
+    "messageBoardTopics": [MessageBoardTopicSchema]
+});
 
 var TopicSchema = new Schema({
     "names": [{
         word: {
             type: ObjectId,
-            ref: Word
+            ref: WordSchema
         },
-        nameApproval: [Vote.schema],
-        "creationInfo": PostInfo.schema
+        nameApproval: [VoteSchema],
+        "creationInfo": PostInfoSchema
     }],
     "is": [{
         type: ObjectId,
-        ref: Category
+        ref: CategorySchema
     }],
     "has": [{
         property: {
             type: ObjectId,
-            ref: CategoryProperty
+            ref: CategoryPropertySchema
         },
 
         values: [{
@@ -38,17 +46,17 @@ var TopicSchema = new Schema({
                 valueURL: mongoose.SchemaTypes.Url,
                 valueObject: ObjectId,
                 valueGeodata: mongoose.Schema.Types.GeoJSON,
-                valueRating: [Vote.schema],
+                valueRating: [VoteSchema],
                 valueName: String //for named elements
             }],
-            propertyValueApproval: [Vote.schema],
-            "creationInfo": PostInfo.schema
+            propertyValueApproval: [VoteSchema],
+            "creationInfo": PostInfoSchema
         }],
 
     }],
-    "topicApproval": [Vote.schema],
-    "creationInfo": PostInfo.schema,
-    "topicDiscussionBoard": MessageBoard.schema
+    "topicApproval": [VoteSchema],
+    "creationInfo": PostInfoSchema,
+    "topicDiscussionBoard": MessageBoardSchema
 }, { collection: 'topics' });
 
 module.exports = mongoose.model('Topic', TopicSchema);
