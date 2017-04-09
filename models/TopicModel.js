@@ -28,10 +28,14 @@ var TopicSchema = new Schema({
         nameApproval: [VoteSchema],
         "creationInfo": PostInfoSchema
     }],
-    "is": {
-        type: ObjectId,
-        ref: CategorySchema
-    },
+    "is": [{
+        category: {
+            type: ObjectId,
+            ref: CategorySchema
+        },
+        categoryApproval: [VoteSchema],
+        creationInfo: PostInfoSchema
+    }],
     "has": [{
         property: {
             type: ObjectId,
