@@ -41,7 +41,7 @@ var TopicSchema = new Schema({
             type: ObjectId,
             ref: CategoryPropertySchema
         },
-        propertyValueApproval: [VoteSchema],
+        propertyApproval: [VoteSchema],
         creationInfo: PostInfoSchema,
         values: [{
             valueArray: [{ //holds single value or if array then multiple values
@@ -51,7 +51,7 @@ var TopicSchema = new Schema({
                 valueURL: mongoose.SchemaTypes.Url,
                 valueObject: ObjectId,
                 valueGeodata: mongoose.Schema.Types.GeoJSON,
-                valueRating: [VoteSchema],
+                valueApproval: [VoteSchema],
                 creationInfo: PostInfoSchema,
                 valueName: String //for named elements
             }]
