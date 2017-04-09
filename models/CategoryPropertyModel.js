@@ -8,11 +8,11 @@ var ObjectId = mongoose.Schema.ObjectId;
 
 var CategoryPropertySchema = new Schema({
     "names": [{
-        word: {
+        "word": {
             type: ObjectId,
             ref: WordSchema
         },
-        nameApproval: [VoteSchema],
+        "nameApproval": [VoteSchema],
         "creationInfo": PostInfoSchema
     }],
     "dataType": {

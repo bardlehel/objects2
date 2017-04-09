@@ -11,7 +11,7 @@ var CategoryParentAssociationSchema = new Schema({
         type: ObjectId,
         ref: CategorySchema
     },
-    "parentAssociationApproval": [VoteSchema],
+    "parentApproval": [VoteSchema],
     "creationInfo": PostInfoSchema
 });
 
@@ -20,7 +20,7 @@ var CategoryPropertyAssociationSchema = new Schema({
         type: ObjectId,
         ref: CategoryPropertySchema
     },
-    "propertyAssociationApproval": [VoteSchema],
+    "propertyApproval": [VoteSchema],
     "creationInfo": PostInfoSchema
 });
 
