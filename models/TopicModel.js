@@ -26,7 +26,7 @@ var TopicSchema = new Schema({
             ref: WordSchema
         },
         nameApproval: [VoteSchema],
-        "creationInfo": PostInfoSchema
+        creationInfo: PostInfoSchema
     }],
     "is": [{
         category: {
@@ -41,7 +41,8 @@ var TopicSchema = new Schema({
             type: ObjectId,
             ref: CategoryPropertySchema
         },
-
+        propertyValueApproval: [VoteSchema],
+        creationInfo: PostInfoSchema,
         values: [{
             valueArray: [{ //holds single value or if array then multiple values
                 valueString: String,
@@ -51,16 +52,14 @@ var TopicSchema = new Schema({
                 valueObject: ObjectId,
                 valueGeodata: mongoose.Schema.Types.GeoJSON,
                 valueRating: [VoteSchema],
+                creationInfo: PostInfoSchema,
                 valueName: String //for named elements
-            }],
-            propertyValueApproval: [VoteSchema],
-            "creationInfo": PostInfoSchema
-        }],
-
+            }]
+        }]
     }],
     "topicApproval": [VoteSchema],
     "creationInfo": PostInfoSchema,
     "topicDiscussionBoard": MessageBoardSchema
-}, { collection: 'topics' });
+}, { collection: "topics" });
 
-module.exports = mongoose.model('Topic', TopicSchema);
+module.exports = mongoose.model("Topic", TopicSchema);
